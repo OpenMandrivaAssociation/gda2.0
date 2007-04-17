@@ -8,9 +8,6 @@
 %{?_with_freetds: %global build_freetds 1}
 %define		build_mdb 0
 %{?_with_mdb: %global build_mdb 1}
-%define		build_mono 1
-%{?_with_mono: %global build_mono 1}
-
 
 %define api 3.0
 %define oname gda
@@ -21,13 +18,11 @@
 %define old_package	%mklibname gda2.0_ 3 
 Summary:	GNU Data Access
 Name: 		%{name}
-Version: 2.99.5
+Version: 2.99.6
 Release: %mkrel 1
 License: 	GPL/LGPL
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
-Patch: libgda-1.9.103-no-sharp.patch
-Patch1: libgda-2.99.5-sharp.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	bison
 BuildRequires:	db4-devel
@@ -46,6 +41,7 @@ BuildRequires:	scrollkeeper
 BuildRequires:  sqlite3-devel
 BuildRequires:  unixODBC-devel
 BuildRequires: automake1.8 intltool
+BuildRequires: libcheck-devel
 %if %build_mysql
 BuildRequires:	MySQL-devel
 %endif
@@ -281,34 +277,8 @@ servers, mail spools, etc).
 It is a complete architecture that provides all you need to
 access your data.
 
-%if %build_mono
-%package -n gda-sharp
-Group: Development/Other
-Summary:GNU Data Access C# bindings
-BuildRequires: mono-devel
-BuildRequires: gtk-sharp2
-Requires: %libname = %version
-
-%description -n gda-sharp
-GNU Data Access is an attempt to provide uniform access to
-different kinds of data sources (databases, information
-servers, mail spools, etc).
-It is a complete architecture that provides all you need to
-access your data.
-
-%files -n gda-sharp
-%defattr(-, root, root)
-%_libdir/libgda/
-%{_libdir}/pkgconfig/gda-sharp-3.0.pc
-%endif
-
 %prep
 %setup -q -n %{pkgname}-%{version}
-%if ! %build_mono
-%patch -p1 -b .no-sharp
-%endif
-%patch1 -p1 -b .sharp
-rm -f gda-sharp/gda-api.raw
 
 # (Abel) mkinstalldirs is not distributed, this is temp hack
 cat > mkinstalldirs << _EOF_
@@ -343,13 +313,10 @@ rm -rf $RPM_BUILD_ROOT
 # remove unneeded files
 rm -f $RPM_BUILD_ROOT%{_libdir}/libgda-%dirver/providers/*.{a,la}
 
-%if !%build_mono
-rm -f %buildroot/%_libdir/libgda/gda-sharp*
-rm -f %buildroot/%_libdir/libgda/gda-api.xml
-%endif
-
-
 %{find_lang} %{pkgname}-%{api} --with-gnome
+
+%check
+make check
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -373,10 +340,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 %{_libdir}/libgda-%{api}.so.%{major}*
 %{_libdir}/libgda-report-%{api}.so.%{major}*
-%{_libdir}/libgda_graph-%{api}.so.%{major}*
-%{_libdir}/libgda_handlers-%{api}.so.%{major}*
-%{_libdir}/libgda_sql_delimiter-%{api}.so.%{major}*
-%{_libdir}/libgda_sql_transaction-%{api}.so.%{major}*
 %{_libdir}/libgdasql-%{api}.so.%{major}*
 
 %files -n %{libname}-devel
@@ -429,5 +392,3 @@ rm -rf $RPM_BUILD_ROOT
 %files xbase
 %defattr(-, root, root)
 %{_libdir}/libgda-%dirver/providers/libgda-xbase.so
-
-
