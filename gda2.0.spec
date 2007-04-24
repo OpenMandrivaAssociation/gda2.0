@@ -18,11 +18,13 @@
 %define old_package	%mklibname gda2.0_ 3 
 Summary:	GNU Data Access
 Name: 		%{name}
-Version: 2.99.6
+Version: 3.0.0
 Release: %mkrel 1
 License: 	GPL/LGPL
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
+#gw add missing man pages
+Patch: libgda-3.0.0-man.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	bison
 BuildRequires:	db4-devel
@@ -279,6 +281,7 @@ access your data.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
+%patch -p1 -b .man
 
 # (Abel) mkinstalldirs is not distributed, this is temp hack
 cat > mkinstalldirs << _EOF_
