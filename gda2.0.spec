@@ -18,7 +18,7 @@
 %define old_package	%mklibname gda2.0_ 3 
 Summary:	GNU Data Access
 Name: 		%{name}
-Version: 3.0.0
+Version: 3.0.1
 Release: %mkrel 1
 License: 	GPL/LGPL
 Group: 		Databases
