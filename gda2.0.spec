@@ -20,7 +20,7 @@
 Summary:	GNU Data Access
 Name: 		%{name}
 Version: 3.1.1
-Release: %mkrel 1
+Release: %mkrel 2
 License: 	GPL/LGPL
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
@@ -79,6 +79,8 @@ Summary:	GNU Data Access Development
 Group: 		System/Libraries
 Provides:	%basiclibname = %{version}-%{release}
 Requires:	%name >= %version
+Provides: %name-sqlite = %version
+Obsoletes: gda3.0-sqlite
 
 %description -n	%{libname}
 GNU Data Access is an attempt to provide uniform access to
@@ -101,6 +103,7 @@ Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Requires:	libxslt-devel >= 1.0.9
 Obsoletes: %mklibname -d %{oname}%{api}_ %major
+%define _requires_exceptions ^devel.libgda-
 
 %description -n	%{libnamedev}
 GNU Data Access is an attempt to provide uniform access to
@@ -170,25 +173,6 @@ separated from it to allow non-GNOME applications to be
 developed based on it.
 
 This package includes the GDA ODBC provider.
-
-%package	sqlite
-Summary:	GDA SQLite Provider
-Group:		Databases
-Requires:	%{name} = %{version}
-
-%description	sqlite
-GNU Data Access is an attempt to provide uniform access to
-different kinds of data sources (databases, information
-servers, mail spools, etc).
-It is a complete architecture that provides all you need to
-access your data.
-
-libgda was part of the GNOME-DB project
-(http://www.gnome-db.org/), but has been
-separated from it to allow non-GNOME applications to be
-developed based on it.
-
-This package includes the GDA SQLite provider.
 
 %package	ldap
 Summary:	GDA LDAP Provider
@@ -346,11 +330,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgda-%{api}.so.%{major}*
 %{_libdir}/libgda-report-%{api}.so.%{major}*
 %{_libdir}/libgdasql-%{api}.so.%{major}*
+%_libdir/libgda-virtual-%{api}.so
+%{_libdir}/libgda-%dirver/providers/libgda-sqlite.so
+
 
 %files -n %{libnamedev}
 %defattr(-, root, root)
 %doc %_datadir/gtk-doc/html/libgda-3.0/
-%{_libdir}/lib*.so
+%{_libdir}/libgda-%{api}.so
+%{_libdir}/libgda-report-%{api}.so
+%{_libdir}/libgdasql-%{api}.so
 %{_libdir}/lib*.a
 %attr(644,root,root) %{_libdir}/lib*.la
 %{_libdir}/pkgconfig/*
@@ -363,10 +352,6 @@ rm -rf $RPM_BUILD_ROOT
 %files odbc
 %defattr(-, root, root)
 %{_libdir}/libgda-%dirver/providers/libgda-odbc.so
-
-%files sqlite
-%defattr(-, root, root)
-%{_libdir}/libgda-%dirver/providers/libgda-sqlite.so
 
 %files ldap
 %defattr(-, root, root)
