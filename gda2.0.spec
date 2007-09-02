@@ -13,12 +13,13 @@
 %define oname gda
 %define	major 3
 %define libname	%mklibname %{oname}%{api}_ %major 
+%define libnamedev	%mklibname -d %{oname}%{api}
 %define basiclibname	%mklibname %{oname}%{api}
 
 %define old_package	%mklibname gda2.0_ 3 
 Summary:	GNU Data Access
 Name: 		%{name}
-Version: 3.0.1
+Version: 3.1.1
 Release: %mkrel 1
 License: 	GPL/LGPL
 Group: 		Databases
@@ -92,15 +93,16 @@ separated from it to allow non-GNOME applications to be
 developed based on it.
 
 
-%package -n	%{libname}-devel
+%package -n	%{libnamedev}
 Summary:	GNU Data Access Development
 Group: 		Development/Databases
 Requires:	%{libname} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Requires:	libxslt-devel >= 1.0.9
+Obsoletes: %mklibname -d %{oname}%{api}_ %major
 
-%description -n	%{libname}-devel
+%description -n	%{libnamedev}
 GNU Data Access is an attempt to provide uniform access to
 different kinds of data sources (databases, information
 servers, mail spools, etc).
@@ -345,7 +347,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgda-report-%{api}.so.%{major}*
 %{_libdir}/libgdasql-%{api}.so.%{major}*
 
-%files -n %{libname}-devel
+%files -n %{libnamedev}
 %defattr(-, root, root)
 %doc %_datadir/gtk-doc/html/libgda-3.0/
 %{_libdir}/lib*.so
