@@ -19,8 +19,8 @@
 %define old_package	%mklibname gda2.0_ 3 
 Summary:	GNU Data Access
 Name: 		%{name}
-Version: 3.1.1
-Release: %mkrel 2
+Version: 3.1.2
+Release: %mkrel 1
 License: 	GPL/LGPL
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
@@ -330,7 +330,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgda-%{api}.so.%{major}*
 %{_libdir}/libgda-report-%{api}.so.%{major}*
 %{_libdir}/libgdasql-%{api}.so.%{major}*
-%_libdir/libgda-virtual-%{api}.so
+%_libdir/libgda-xslt-%{api}.so.0*
 %{_libdir}/libgda-%dirver/providers/libgda-sqlite.so
 
 
@@ -340,6 +340,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgda-%{api}.so
 %{_libdir}/libgda-report-%{api}.so
 %{_libdir}/libgdasql-%{api}.so
+%_libdir/libgda-xslt-%{api}.so
 %{_libdir}/lib*.a
 %attr(644,root,root) %{_libdir}/lib*.la
 %{_libdir}/pkgconfig/*
