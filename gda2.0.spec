@@ -315,7 +315,7 @@ rm -rf $RPM_BUILD_ROOT
 		  
 %files -f %{pkgname}-%{api}.lang
 %defattr(-, root, root)
-%doc AUTHORS COPYING ChangeLog README
+%doc AUTHORS COPYING README
 %{_bindir}/*
 %dir %{_sysconfdir}/libgda-%dirver
 %config(noreplace) %_sysconfdir/libgda-%dirver/sales_test.db
