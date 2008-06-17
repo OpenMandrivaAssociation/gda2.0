@@ -212,6 +212,7 @@ developed based on it.
 
 This package includes the GDA Berkeley Database provider.
 
+%if %build_freetds
 %package	freetds
 Summary:	GDA FreeTDS Provider
 Group:		Databases
@@ -230,6 +231,7 @@ separated from it to allow non-GNOME applications to be
 developed based on it.
 
 This package includes the GDA FreeTDS provider.
+%endif
 
 %package	mdb
 Summary:	GDA MDB Provider
