@@ -20,7 +20,7 @@
 Summary:	GNU Data Access
 Name: 		%{name}
 Version: 3.1.5
-Release: %mkrel 1
+Release: %mkrel 2
 License: 	GPLv2+ and LGPLv2+
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
@@ -78,6 +78,7 @@ Provides:	%basiclibname = %{version}-%{release}
 Requires:	%name >= %version
 Provides: %name-sqlite = %version
 Obsoletes: gda3.0-sqlite
+Conflicts: %mklibname gda3.0_ 3
 
 %description -n	%{libname}
 GNU Data Access is an attempt to provide uniform access to
