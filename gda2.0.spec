@@ -11,7 +11,7 @@
 
 %define api 3.0
 %define oname gda
-%define	major 3
+%define	major 2
 %define libname	%mklibname %{oname}%{api}_ %major 
 %define libnamedev	%mklibname -d %{oname}%{api}
 %define basiclibname	%mklibname %{oname}%{api}
@@ -19,13 +19,11 @@
 %define old_package	%mklibname gda2.0_ 3 
 Summary:	GNU Data Access
 Name: 		%{name}
-Version: 3.1.2
-Release: %mkrel 3
-License: 	GPL/LGPL
+Version: 3.1.5
+Release: %mkrel 1
+License: 	GPLv2+ and LGPLv2+
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
-#gw add missing man pages
-Patch: libgda-3.0.0-man.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	bison
 BuildRequires:	db4-devel
@@ -269,16 +267,10 @@ access your data.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
-%patch -p1 -b .man
-
-# (Abel) mkinstalldirs is not distributed, this is temp hack
-cat > mkinstalldirs << _EOF_
-#!/bin/sh
-exec mkdir -p "\$@"
-_EOF_
-chmod +x mkinstalldirs
-
+libtoolize --copy --force
+aclocal
 autoconf
+automake
 
 %build
 %configure2_5x \
@@ -291,7 +283,6 @@ autoconf
 %if !%build_mdb
 	--with-mdb=no \
 %endif
-	--with-sqlite=%_prefix \
 	--without-firebird
 
 make
