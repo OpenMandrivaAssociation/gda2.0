@@ -33,15 +33,14 @@ BuildRequires:	glib2-devel
 BuildRequires:	libxslt-devel >= 1.0.9
 BuildRequires:	ncurses-devel
 BuildRequires:  openldap2-devel
-#gw for the intltool scripts:
-BuildRequires:	perl-XML-Parser
+BuildRequires:	intltool
 BuildRequires:	popt-devel
 BuildRequires:	postgresql-devel
 BuildRequires:	readline-devel
 BuildRequires:	scrollkeeper
 BuildRequires:  sqlite3-devel
 BuildRequires:  unixODBC-devel
-BuildRequires: automake1.8 intltool
+BuildRequires: automake1.8
 BuildRequires: libcheck-devel
 %if %build_mysql
 BuildRequires:	MySQL-devel
