@@ -12,15 +12,17 @@
 %define api 3.0
 %define oname gda
 %define	major 2
+%define xsltmajor 0
 %define libname	%mklibname %{oname}%{api}_ %major 
+%define libnamexslt %mklibname gda-xslt %{api} %xsltmajor 
 %define libnamedev	%mklibname -d %{oname}%{api}
 %define basiclibname	%mklibname %{oname}%{api}
 
-%define old_package	%mklibname gda2.0_ 3 
+%define old_package	%mklibname gda3.0_ 3 
 Summary:	GNU Data Access
 Name: 		%{name}
 Version: 3.1.5
-Release: %mkrel 2
+Release: %mkrel 3
 License: 	GPLv2+ and LGPLv2+
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
@@ -36,6 +38,7 @@ BuildRequires:  openldap2-devel
 BuildRequires:	intltool
 BuildRequires:	popt-devel
 BuildRequires:	postgresql-devel
+BuildRequires:  gnome-vfs2-devel
 BuildRequires:	readline-devel
 BuildRequires:	scrollkeeper
 BuildRequires:  sqlite3-devel
@@ -76,11 +79,29 @@ Summary:	GNU Data Access Development
 Group: 		System/Libraries
 Provides:	%basiclibname = %{version}-%{release}
 Requires:	%name >= %version
-Provides: %name-sqlite = %version
-Obsoletes: gda3.0-sqlite
-Conflicts: %mklibname gda3.0_ 3
+Conflicts:	%old_package
+Requires:	%name-sqlite >= %version
 
 %description -n	%{libname}
+GNU Data Access is an attempt to provide uniform access to
+different kinds of data sources (databases, information
+servers, mail spools, etc).
+It is a complete architecture that provides all you need to
+access your data.
+
+libgda was part of the GNOME-DB project
+(http://www.gnome-db.org/), but has been
+separated from it to allow non-GNOME applications to be
+developed based on it.
+
+%package -n	%{libnamexslt}
+Summary:	GNU Data Access Development
+Group: 		System/Libraries
+Requires:	%name >= %version
+Conflicts:	%old_package
+Conflicts: %libname < 3.1.5-3mdv
+
+%description -n	%{libnamexslt}
 GNU Data Access is an attempt to provide uniform access to
 different kinds of data sources (databases, information
 servers, mail spools, etc).
@@ -97,9 +118,9 @@ developed based on it.
 Summary:	GNU Data Access Development
 Group: 		Development/Databases
 Requires:	%{libname} = %{version}
+Requires:	%{libnamexslt} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
-Requires:	libxslt-devel >= 1.0.9
 Obsoletes: %mklibname -d %{oname}%{api}_ %major
 %define _requires_exceptions ^devel.libgda-
 
@@ -265,6 +286,29 @@ servers, mail spools, etc).
 It is a complete architecture that provides all you need to
 access your data.
 
+
+%package	sqlite
+Summary:	GDA sqlite Provider
+Group:		Databases
+Requires:	%{name} = %{version}
+Obsoletes:      gda3.0-sqlite
+Conflicts:	%libname < 3.1.5-3mdv
+Conflicts:	%old_package
+
+%description	sqlite
+GNU Data Access is an attempt to provide uniform access to
+different kinds of data sources (databases, information
+servers, mail spools, etc).
+It is a complete architecture that provides all you need to
+access your data.
+
+libgda was part of the GNOME-DB project
+(http://www.gnome-db.org/), but has been
+separated from it to allow non-GNOME applications to be
+developed based on it.
+
+This package includes the GDA sqlite provider
+
 %prep
 %setup -q -n %{pkgname}-%{version}
 libtoolize --copy --force
@@ -305,9 +349,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
 %postun -n %{libname} -p /sbin/ldconfig
+%post -n %{libnamexslt} -p /sbin/ldconfig
+%postun -n %{libnamexslt} -p /sbin/ldconfig
 %endif
 		  
 %files -f %{pkgname}-%{api}.lang
@@ -327,9 +371,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgda-%{api}.so.%{major}*
 %{_libdir}/libgda-report-%{api}.so.%{major}*
 %{_libdir}/libgdasql-%{api}.so.%{major}*
-%_libdir/libgda-xslt-%{api}.so.0*
-%{_libdir}/libgda-%dirver/providers/libgda-sqlite.so
 
+%files -n %{libnamexslt}
+%defattr(-, root, root)
+%_libdir/libgda-xslt-%{api}.so.%{xsltmajor}*
 
 %files -n %{libnamedev}
 %defattr(-, root, root)
@@ -342,6 +387,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) %{_libdir}/lib*.la
 %{_libdir}/pkgconfig/*
 %{_includedir}/*
+
+%files sqlite
+%defattr(-, root, root)
+%{_libdir}/libgda-%dirver/providers/libgda-sqlite.so
 
 %files postgres
 %defattr(-, root, root)
