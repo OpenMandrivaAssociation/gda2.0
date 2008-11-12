@@ -252,6 +252,7 @@ developed based on it.
 This package includes the GDA FreeTDS provider.
 %endif
 
+%if %build_mdb
 %package	mdb
 Summary:	GDA MDB Provider
 Group:		Databases
@@ -271,7 +272,7 @@ developed based on it.
 
 This package includes the GDA MDB provider, which can access
 Microsoft Access databases.
-
+%endif
 
 %package	xbase
 Summary:	GDA xbase Provider
