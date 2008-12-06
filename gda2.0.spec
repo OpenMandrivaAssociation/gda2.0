@@ -22,11 +22,11 @@
 Summary:	GNU Data Access
 Name: 		%{name}
 Version: 3.1.5
-Release: %mkrel 3
+Release: %mkrel 4
 License: 	GPLv2+ and LGPLv2+
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	bison
 BuildRequires:	db4-devel
 BuildRequires:	flex
