@@ -46,7 +46,7 @@ BuildRequires:  unixODBC-devel
 BuildRequires: automake1.8
 BuildRequires: libcheck-devel
 %if %build_mysql
-BuildRequires:	MySQL-devel
+BuildRequires:	mysql-devel
 %endif
 %if %build_freetds
 BuildRequires:	freetds-devel
