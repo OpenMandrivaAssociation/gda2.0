@@ -26,6 +26,7 @@ Release: %mkrel 5
 License: 	GPLv2+ and LGPLv2+
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
+Patch: libgda-3.1.5-format-strings.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	bison
 BuildRequires:	db4-devel
@@ -312,6 +313,7 @@ This package includes the GDA sqlite provider
 
 %prep
 %setup -q -n %{pkgname}-%{version}
+%patch -p1
 libtoolize --copy --force
 aclocal
 autoconf
@@ -328,7 +330,8 @@ automake
 %if !%build_mdb
 	--with-mdb=no \
 %endif
-	--without-firebird
+	--without-firebird \
+	--disable-static
 
 make
 
@@ -384,7 +387,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgda-report-%{api}.so
 %{_libdir}/libgdasql-%{api}.so
 %_libdir/libgda-xslt-%{api}.so
-%{_libdir}/lib*.a
 %attr(644,root,root) %{_libdir}/lib*.la
 %{_libdir}/pkgconfig/*
 %{_includedir}/*
