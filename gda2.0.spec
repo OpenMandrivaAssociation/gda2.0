@@ -26,7 +26,8 @@ Release: %mkrel 5
 License: 	GPLv2+ and LGPLv2+
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
-Patch: libgda-3.1.5-format-strings.patch
+Patch0: libgda-3.1.5-format-strings.patch
+Patch1: libgda-3.1.5-fix-install.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	bison
 BuildRequires:	db4-devel
@@ -313,13 +314,11 @@ This package includes the GDA sqlite provider
 
 %prep
 %setup -q -n %{pkgname}-%{version}
-%patch -p1
-libtoolize --copy --force
-aclocal
-autoconf
-automake
+%patch0 -p1
+%patch1 -p0
 
 %build
+autoreconf -fi
 %configure2_5x \
 %if %build_mysql
 	--with-mysql=yes \
