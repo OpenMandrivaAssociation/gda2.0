@@ -28,6 +28,7 @@ Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
 Patch0: libgda-3.1.5-format-strings.patch
 Patch1: libgda-3.1.5-fix-install.patch
+Patch2: libgda-3.1.5-xbase64.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	bison
 BuildRequires:	db4-devel
@@ -280,7 +281,7 @@ Microsoft Access databases.
 Summary:	GDA xbase Provider
 Group:		Databases
 Requires:	%{name} = %{version}
-BuildRequires:	libxbase-devel
+BuildRequires:	xbase-devel
 
 %description	xbase
 GNU Data Access is an attempt to provide uniform access to
@@ -316,6 +317,7 @@ This package includes the GDA sqlite provider
 %setup -q -n %{pkgname}-%{version}
 %patch0 -p1
 %patch1 -p0
+%patch2 -p0
 
 %build
 autoreconf -fi
