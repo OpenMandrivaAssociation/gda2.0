@@ -22,16 +22,17 @@
 Summary:	GNU Data Access
 Name: 		%{name}
 Version: 3.1.5
-Release: %mkrel 10
+Release: %mkrel 11
 License: 	GPLv2+ and LGPLv2+
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
 Patch0: libgda-3.1.5-format-strings.patch
 Patch1: libgda-3.1.5-fix-install.patch
 Patch2: libgda-3.1.5-xbase64.patch
+Patch3: libgda-3.1.5-lib64.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	bison
-BuildRequires:	db4-devel
+BuildRequires:	db-devel
 BuildRequires:	flex
 BuildRequires:	gdbm-devel
 BuildRequires:	glib2-devel
@@ -58,8 +59,6 @@ BuildRequires:	freetds-devel
 BuildRequires:	libmdbtools-devel
 %endif
 BuildRequires:	gtk-doc
-#Requires(post):		scrollkeeper
-#Requires(postun):	scrollkeeper
 Conflicts:	gda < 0.3
 URL: 		http://www.gnome-db.org/
 
@@ -125,7 +124,6 @@ Requires:	%{libnamexslt} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Obsoletes: %mklibname -d %{oname}%{api}_ %major
-%define _requires_exceptions ^devel.libgda-
 
 %description -n	%{libnamedev}
 GNU Data Access is an attempt to provide uniform access to
@@ -318,6 +316,7 @@ This package includes the GDA sqlite provider
 %patch0 -p1
 %patch1 -p0
 %patch2 -p0
+%patch3 -p0
 
 %build
 autoreconf -fi
