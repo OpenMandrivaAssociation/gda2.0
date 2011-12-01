@@ -336,12 +336,12 @@ autoreconf -fi
 make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %{makeinstall_std}
 
 # remove unneeded files
-rm -f $RPM_BUILD_ROOT%{_libdir}/libgda-%dirver/providers/*.{a,la}
+rm -f %{buildroot}%{_libdir}/libgda-%dirver/providers/*.{a,la}
 
 %{find_lang} %{pkgname}-%{api} --with-gnome
 
@@ -349,7 +349,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/libgda-%dirver/providers/*.{a,la}
 #make check
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
