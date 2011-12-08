@@ -22,7 +22,7 @@
 Summary:	GNU Data Access
 Name: 		%{name}
 Version: 3.1.5
-Release: %mkrel 11
+Release: %mkrel 12
 License: 	GPLv2+ and LGPLv2+
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
