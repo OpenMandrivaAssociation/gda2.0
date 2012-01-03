@@ -30,6 +30,7 @@ Patch0: libgda-3.1.5-format-strings.patch
 Patch1: libgda-3.1.5-fix-install.patch
 Patch2: libgda-3.1.5-xbase64.patch
 Patch3: libgda-3.1.5-lib64.patch
+Patch4: libgda-3.1.5-glib-includes.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	bison
 BuildRequires:	db-devel
@@ -317,6 +318,7 @@ This package includes the GDA sqlite provider
 %patch1 -p0
 %patch2 -p0
 %patch3 -p0
+%patch4 -p1
 
 %build
 autoreconf -fi
