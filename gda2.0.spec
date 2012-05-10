@@ -322,6 +322,7 @@ This package includes the GDA sqlite provider
 
 %build
 autoreconf -fi
+export LIBS=-ldl
 %configure2_5x \
 %if %build_mysql
 	--with-mysql=yes \
@@ -389,7 +390,6 @@ rm -rf %{buildroot}
 %{_libdir}/libgda-report-%{api}.so
 %{_libdir}/libgdasql-%{api}.so
 %_libdir/libgda-xslt-%{api}.so
-%attr(644,root,root) %{_libdir}/lib*.la
 %{_libdir}/pkgconfig/*
 %{_includedir}/*
 
