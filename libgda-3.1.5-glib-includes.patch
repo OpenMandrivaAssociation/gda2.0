@@ -1,0 +1,596 @@
+--- libgda-3.1.5/libgda/gda-column.c.glib-includes	2012-01-03 11:14:10.663468927 +0100
++++ libgda-3.1.5/libgda/gda-column.c	2012-01-03 11:15:07.723497217 +0100
+@@ -23,8 +23,8 @@
+  * Boston, MA 02111-1307, USA.
+  */
+ 
+-#include <glib/gmessages.h>
+-#include <glib/gstrfuncs.h>
++#include <glib.h>
++#include <glib.h>
+ #include <libgda/gda-column.h>
+ #include <string.h>
+ #include "gda-marshal.h"
+--- libgda-3.1.5/libgda/gda-column.h.glib-includes	2012-01-03 11:14:10.561468876 +0100
++++ libgda-3.1.5/libgda/gda-column.h	2012-01-03 11:15:07.408497061 +0100
+@@ -26,9 +26,9 @@
+ #ifndef __GDA_COLUMN_H__
+ #define __GDA_COLUMN_H__
+ 
+-#include <glib-object.h>
++#include <glib-object.h>
+ #include <libgda/gda-value.h>
+-#include <glib/gmacros.h>
++#include <glib.h>
+ #include <libgda/gda-decl.h>
+ 
+ G_BEGIN_DECLS
+--- libgda-3.1.5/libgda/gda-command.c.glib-includes	2012-01-03 11:14:10.655468923 +0100
++++ libgda-3.1.5/libgda/gda-command.c	2012-01-03 11:15:07.698497204 +0100
+@@ -21,9 +21,9 @@
+  * Boston, MA 02111-1307, USA.
+  */
+ 
+-#include <glib/gmem.h>
+-#include <glib/gmessages.h>
+-#include <glib/gstrfuncs.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib.h>
+ #include <libgda/gda-command.h>
+ 
+ GType
+--- libgda-3.1.5/libgda/gda-command.h.glib-includes	2012-01-03 11:14:10.647468919 +0100
++++ libgda-3.1.5/libgda/gda-command.h	2012-01-03 11:15:07.695497203 +0100
+@@ -24,9 +24,9 @@
+ #ifndef __GDA_COMMAND_H__
+ #define __GDA_COMMAND_H__
+ 
+-#include <glib-object.h>
+-#include <glib/gmacros.h>
+-#include <glib/gtypes.h>
++#include <glib-object.h>
++#include <glib.h>
++#include <glib.h>
+ 
+ G_BEGIN_DECLS
+ 
+--- libgda-3.1.5/libgda/gda-config.c.glib-includes	2012-01-03 11:14:11.090469138 +0100
++++ libgda-3.1.5/libgda/gda-config.c	2012-01-03 11:15:10.278498489 +0100
+@@ -38,7 +38,7 @@
+ #include <sys/stat.h>
+ #ifdef HAVE_FAM
+ #include <fam.h>
+-#include <glib/giochannel.h>
++#include <glib.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+--- libgda-3.1.5/libgda/gda-config.h.glib-includes	2012-01-03 11:14:11.187469186 +0100
++++ libgda-3.1.5/libgda/gda-config.h	2012-01-03 11:15:10.560498629 +0100
+@@ -23,7 +23,7 @@
+ #ifndef __GDA_CONFIG_H__
+ #define __GDA_CONFIG_H__
+ 
+-#include <glib/gmacros.h>
++#include <glib.h>
+ #include <libgda/gda-data-model.h>
+ #include <libgda/gda-parameter.h>
+ 
+--- libgda-3.1.5/libgda/gda-data-model-array.c.glib-includes	2012-01-03 11:14:10.638468914 +0100
++++ libgda-3.1.5/libgda/gda-data-model-array.c	2012-01-03 11:15:07.694497202 +0100
+@@ -22,9 +22,9 @@
+  */
+ 
+ #include <string.h>
+-#include <glib/garray.h>
++#include <glib.h>
+ #include <libgda/gda-data-model-array.h>
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-row.h>
+ #include <libgda/gda-data-model.h>
+ #include <libgda/gda-data-model-extra.h>
+ #include <libgda/gda-data-model-extra.h>
+--- libgda-3.1.5/libgda/gda-data-model-filter-sql.c.glib-includes	2012-01-03 11:14:10.803468997 +0100
++++ libgda-3.1.5/libgda/gda-data-model-filter-sql.c	2012-01-03 11:15:08.201497455 +0100
+@@ -21,10 +21,10 @@
+  * Boston, MA 02111-1307, USA.
+  */
+ 
+-#include <glib/gdataset.h>
+-#include <glib-object.h>
++#include <glib.h>
++#include <glib-object.h>
+ #include <libsql/sql_parser.h>
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-log.h>
+ #include <libgda/gda-data-model-filter-sql.h>
+ #include <libgda/gda-data-model.h>
+--- libgda-3.1.5/libgda/gda-data-model-hash.c.glib-includes	2012-01-03 11:14:10.621468907 +0100
++++ libgda-3.1.5/libgda/gda-data-model-hash.c	2012-01-03 11:15:07.663497186 +0100
+@@ -23,8 +23,8 @@
+  * Boston, MA 02111-1307, USA.
+  */
+ 
+-#include <glib/ghash.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-data-model-hash.h>
+ #include <libgda/gda-data-model-extra.h>
+ 
+--- libgda-3.1.5/libgda/gda-init.c.glib-includes	2012-01-03 11:14:10.697468944 +0100
++++ libgda-3.1.5/libgda/gda-init.c	2012-01-03 11:15:07.929497320 +0100
+@@ -17,10 +17,10 @@
+  * Boston, MA 02111-1307, USA.
+  */
+ 
+-#include <glib/gmain.h>
++#include <glib.h>
+ #include <gmodule.h>
+ #include <libgda/libgda.h>
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ 
+ #include <libgda/gda-dict-private.h>
+ #include <libgda/graph/gda-dict-reg-graphs.h>
+--- libgda-3.1.5/libgda/gda-log.c.glib-includes	2012-01-03 11:14:10.747468968 +0100
++++ libgda-3.1.5/libgda/gda-log.c	2012-01-03 11:15:08.037497374 +0100
+@@ -24,11 +24,11 @@
+ #include <syslog.h>
+ #endif
+ #include <time.h>
+-#include <glib/gmem.h>
+-#include <glib/gmessages.h>
+-#include <glib/gstrfuncs.h>
+-#include <glib/gutils.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-log.h>
+ 
+ static GStaticRecMutex gda_mutex = G_STATIC_REC_MUTEX_INIT;
+--- libgda-3.1.5/libgda/gda-log.h.glib-includes	2012-01-03 11:14:11.134469160 +0100
++++ libgda-3.1.5/libgda/gda-log.h	2012-01-03 11:15:10.429498564 +0100
+@@ -20,8 +20,8 @@
+ #if !defined(__gda_log_h__)
+ #  define __gda_log_h__
+ 
+-#include <glib/gmacros.h>
+-#include <glib/gtypes.h>
++#include <glib.h>
++#include <glib.h>
+ #include <time.h>
+ 
+ G_BEGIN_DECLS
+--- libgda-3.1.5/libgda/gda-quark-list.c.glib-includes	2012-01-03 11:14:10.739468964 +0100
++++ libgda-3.1.5/libgda/gda-quark-list.c	2012-01-03 11:15:08.031497370 +0100
+@@ -22,10 +22,10 @@
+  */
+ 
+ #include <libgda/gda-quark-list.h>
+-#include <glib/ghash.h>
+-#include <glib/gmem.h>
+-#include <glib/gmessages.h>
+-#include <glib/gstrfuncs.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib.h>
+ 
+ struct _GdaQuarkList {
+ 	GHashTable *hash_table;
+--- libgda-3.1.5/libgda/gda-quark-list.h.glib-includes	2012-01-03 11:14:11.020469103 +0100
++++ libgda-3.1.5/libgda/gda-quark-list.h	2012-01-03 11:15:10.126498413 +0100
+@@ -24,9 +24,9 @@
+ #ifndef __GDA_QUARK_LIST_H__
+ #define __GDA_QUARK_LIST_H__
+ 
+-#include <glib/gmacros.h>
+-#include <glib/gtypes.h>
+-#include <glib-object.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib-object.h>
+ 
+ G_BEGIN_DECLS
+ 
+--- libgda-3.1.5/libgda/gda-row.h.glib-includes	2012-01-03 11:14:11.119469153 +0100
++++ libgda-3.1.5/libgda/gda-row.h	2012-01-03 11:15:10.386498542 +0100
+@@ -25,9 +25,9 @@
+ #ifndef __GDA_ROW_H__
+ #define __GDA_ROW_H__
+ 
+-#include <glib-object.h>
++#include <glib-object.h>
+ #include <libgda/gda-column.h>
+-#include <glib/gmacros.h>
++#include <glib.h>
+ #include <libgda/gda-decl.h>
+ 
+ G_BEGIN_DECLS
+--- libgda-3.1.5/libgda/gda-server-operation.c.glib-includes	2012-01-03 11:14:11.127469157 +0100
++++ libgda-3.1.5/libgda/gda-server-operation.c	2012-01-03 11:15:10.428498563 +0100
+@@ -21,7 +21,7 @@
+  */
+ 
+ #include <stdlib.h>
+-#include <glib/gmessages.h>
++#include <glib.h>
+ #include <libgda/gda-marshal.h>
+ #include <libgda/gda-dict.h>
+ #include <libgda/gda-dict-type.h>
+--- libgda-3.1.5/libgda/gda-server-provider.c.glib-includes	2012-01-03 11:14:11.112469149 +0100
++++ libgda-3.1.5/libgda/gda-server-provider.c	2012-01-03 11:15:10.376498537 +0100
+@@ -22,7 +22,7 @@
+  * Boston, MA 02111-1307, USA.
+  */
+ 
+-#include <glib/gmessages.h>
++#include <glib.h>
+ #include <libgda/gda-server-provider.h>
+ #include <libgda/gda-server-provider-extra.h>
+ #include <libgda/gda-server-provider-private.h>
+--- libgda-3.1.5/libgda/gda-util.c.glib-includes	2012-01-03 11:14:10.971469080 +0100
++++ libgda-3.1.5/libgda/gda-util.c	2012-01-03 11:15:09.982498341 +0100
+@@ -27,12 +27,12 @@
+ #include <fcntl.h>
+ #include <unistd.h>
+ #include <string.h>
+-#include <glib/gfileutils.h>
+-#include <glib/gmessages.h>
+-#include <glib/gstrfuncs.h>
+-#include <glib/gprintf.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib.h>
+ #include <libsql/sql_parser.h>
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-log.h>
+ #include <libgda/gda-util.h>
+ #include <libgda/gda-column.h>
+--- libgda-3.1.5/libgda/gda-util.h.glib-includes	2012-01-03 11:14:10.811469001 +0100
++++ libgda-3.1.5/libgda/gda-util.h	2012-01-03 11:15:08.203497456 +0100
+@@ -24,8 +24,8 @@
+ #ifndef __GDA_UTIL_H__
+ #define __GDA_UTIL_H__
+ 
+-#include <glib/ghash.h>
+-#include <glib/glist.h>
++#include <glib.h>
++#include <glib.h>
+ #include "gda-parameter.h"
+ #include "gda-row.h"
+ #include "gda-connection.h"
+--- libgda-3.1.5/libgda/gda-value.c.glib-includes	2012-01-03 11:14:10.578468885 +0100
++++ libgda-3.1.5/libgda/gda-value.c	2012-01-03 11:15:07.456497085 +0100
+@@ -28,11 +28,11 @@
+ #include <string.h>
+ #include <stdlib.h>
+ #include <time.h>
+-#include <glib/gdate.h>
+-#include <glib/gmessages.h>
+-#include <glib/gstrfuncs.h>
+-#include <glib/gstring.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-value.h>
+ #include <libgda/gda-blob-op.h>
+ #include <libgda/gda-util.h>
+--- libgda-3.1.5/libgda/gda-value.h.glib-includes	2012-01-03 11:14:10.595468893 +0100
++++ libgda-3.1.5/libgda/gda-value.h	2012-01-03 11:15:07.498497105 +0100
+@@ -27,9 +27,9 @@
+ #define __GDA_VALUE_H__
+ 
+ #include <time.h>
+-#include <glib/glist.h>
+-#include <glib/gmacros.h>
+-#include <glib-object.h>
++#include <glib.h>
++#include <glib.h>
++#include <glib-object.h>
+ #include <libxml/tree.h>
+ #include <libgda/gda-decl.h>
+ 
+--- libgda-3.1.5/libgda/sqlite/gda-sqlite.h.glib-includes	2012-01-03 11:14:10.871469030 +0100
++++ libgda-3.1.5/libgda/sqlite/gda-sqlite.h	2012-01-03 11:15:09.825498263 +0100
+@@ -25,8 +25,8 @@
+ #ifndef __GDA_SQLITE_H__
+ #define __GDA_SQLITE_H__
+ 
+-#include <glib/gmacros.h>
+-#include <glib/gtypes.h>
++#include <glib.h>
++#include <glib.h>
+ #include <libgda/gda-value.h>
+ #include <libgda/gda-connection.h>
+ 
+--- libgda-3.1.5/libsql/sql_parser.c.glib-includes	2012-01-03 11:14:11.336469260 +0100
++++ libgda-3.1.5/libsql/sql_parser.c	2012-01-03 11:15:11.072498882 +0100
+@@ -17,8 +17,8 @@
+ 
+ #include <stdio.h>
+ #include <glib.h>
+-#include <glib/gi18n-lib.h>
+-#include <glib/gprintf.h>
++#include <glib/gi18n-lib.h>
++#include <glib.h>
+ #include <strings.h>
+ #include <string.h>
+ 
+--- libgda-3.1.5/providers/bdb/gda-bdb.h.glib-includes	2012-01-03 11:14:11.666469422 +0100
++++ libgda-3.1.5/providers/bdb/gda-bdb.h	2012-01-03 11:15:11.638499165 +0100
+@@ -25,8 +25,8 @@
+ #if defined(HAVE_CONFIG_H)
+ #endif
+ 
+-#include <glib/gmacros.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-server-provider.h>
+ #include <db.h>
+ 
+--- libgda-3.1.5/providers/firebird/gda-firebird-provider.c.glib-includes	2012-01-03 11:14:11.404469294 +0100
++++ libgda-3.1.5/providers/firebird/gda-firebird-provider.c	2012-01-03 11:15:11.291498991 +0100
+@@ -21,13 +21,13 @@
+  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+  */
+ 
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-data-model-array.h>
+ #include <libgda/gda-data-model-private.h>
+ #include <libgda/gda-server-provider-extra.h>
+ #include <libgda/gda-command.h>
+ #include <libgda/gda-parameter-list.h>
+-#include <glib/gprintf.h>
++#include <glib.h>
+ #include <string.h>
+ #include "gda-firebird-provider.h"
+ #include "gda-firebird-recordset.h"
+--- libgda-3.1.5/providers/firebird/gda-firebird-recordset.c.glib-includes	2012-01-03 11:14:11.420469302 +0100
++++ libgda-3.1.5/providers/firebird/gda-firebird-recordset.c	2012-01-03 11:15:11.323499008 +0100
+@@ -27,8 +27,8 @@
+ #include "gda-firebird-blob-op.h"
+ #include <libgda/gda-quark-list.h>
+ #include <libgda/gda-parameter-list.h>
+-#include <glib/gi18n-lib.h>
+-#include <glib/gprintf.h>
++#include <glib/gi18n-lib.h>
++#include <glib.h>
+ #include <string.h>
+ #include <math.h>
+                                                                                                                              
+--- libgda-3.1.5/providers/freetds/gda-freetds.h.glib-includes	2012-01-03 11:14:11.735469457 +0100
++++ libgda-3.1.5/providers/freetds/gda-freetds.h	2012-01-03 11:15:11.692499191 +0100
+@@ -24,8 +24,8 @@
+ #if defined(HAVE_CONFIG_H)
+ #endif
+ 
+-#include <glib/gmacros.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-server-provider.h>
+ #include <tds.h>
+ #include "gda-freetds-provider.h"
+--- libgda-3.1.5/providers/freetds/gda-freetds-message.h.glib-includes	2012-01-03 11:14:11.718469449 +0100
++++ libgda-3.1.5/providers/freetds/gda-freetds-message.h	2012-01-03 11:15:11.689499191 +0100
+@@ -24,8 +24,8 @@
+ #if defined(HAVE_CONFIG_H)
+ #endif
+ 
+-#include <glib/gmacros.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-server-provider.h>
+ #include <tds.h>
+ #include "gda-freetds.h"
+--- libgda-3.1.5/providers/freetds/gda-freetds-types.h.glib-includes	2012-01-03 11:14:11.791469485 +0100
++++ libgda-3.1.5/providers/freetds/gda-freetds-types.h	2012-01-03 11:15:11.746499219 +0100
+@@ -24,8 +24,8 @@
+ #if defined(HAVE_CONFIG_H)
+ #endif
+ 
+-#include <glib/gmacros.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-server-provider.h>
+ #include <tds.h>
+ #include "gda-freetds.h"
+--- libgda-3.1.5/providers/ibmdb2/gda-ibmdb2.h.glib-includes	2012-01-03 11:14:11.538469359 +0100
++++ libgda-3.1.5/providers/ibmdb2/gda-ibmdb2.h	2012-01-03 11:15:11.460499077 +0100
+@@ -23,12 +23,12 @@
+ #if !defined(__gda_ibmdb2_h__)
+ #  define __gda_ibmdb2_h__
+ 
+-#include <glib/gmacros.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-connection.h>
+ #include <libgda/gda-server-provider.h>
+ #include <libgda/gda-value.h>
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ #include <sqlcli1.h>
+ #include "gda-ibmdb2-provider.h"
+ 
+--- libgda-3.1.5/providers/ibmdb2/gda-ibmdb2-types.h.glib-includes	2012-01-03 11:14:11.555469368 +0100
++++ libgda-3.1.5/providers/ibmdb2/gda-ibmdb2-types.h	2012-01-03 11:15:11.463499077 +0100
+@@ -23,8 +23,8 @@
+ #ifndef __GDA_IBMDB2_TYPES_H__
+ #define __GDA_IBMDB2_TYPES_H__
+ 
+-#include <glib/gmacros.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-server-provider.h>
+ #include <sqlcli1.h>
+ #include "gda-ibmdb2.h"
+--- libgda-3.1.5/providers/ldap/gda-ldap.h.glib-includes	2012-01-03 11:14:11.807469493 +0100
++++ libgda-3.1.5/providers/ldap/gda-ldap.h	2012-01-03 11:15:11.765499228 +0100
+@@ -26,10 +26,10 @@
+ #if !defined(__gda_ldap_h__)
+ #  define __gda_ldap_h__
+ 
+-#include <glib/gmacros.h>
++#include <glib.h>
+ #include <libgda/gda-connection.h>
+ #include <libgda/gda-server-provider.h>
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-value.h>
+ #include "gda-ldap-provider.h"
+ /* TODO: we use the old API.  We should update this to the new API. */
+--- libgda-3.1.5/providers/mdb/gda-mdb.h.glib-includes	2012-01-03 11:14:11.832469505 +0100
++++ libgda-3.1.5/providers/mdb/gda-mdb.h	2012-01-03 11:15:11.781499236 +0100
+@@ -24,10 +24,10 @@
+ #ifndef __GDA_MDB_H__
+ #define __GDA_MDB_H__
+ 
+-#include <glib/gmacros.h>
++#include <glib.h>
+ #include <libgda/gda-connection.h>
+ #include <libgda/gda-server-provider.h>
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-value.h>
+ #include <mdbtools.h>
+ #include "gda-mdb-provider.h"
+--- libgda-3.1.5/providers/mdb/gda-mdb-provider.c.glib-includes	2012-01-03 11:14:11.840469508 +0100
++++ libgda-3.1.5/providers/mdb/gda-mdb-provider.c	2012-01-03 11:15:11.794499243 +0100
+@@ -22,11 +22,11 @@
+  */
+ 
+ #include <stdlib.h>
+-#include <glib/gbacktrace.h>
++#include <glib.h>
+ #include <virtual/gda-vconnection-data-model.h>
+ #include <libgda/gda-data-model-array.h>
+ #include <libgda/gda-data-model-private.h>
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-server-provider-extra.h>
+ #include <libgda/gda-parameter-list.h>
+ #include "gda-mdb.h"
+--- libgda-3.1.5/providers/msql/gda-msql.h.glib-includes	2012-01-03 11:14:11.446469314 +0100
++++ libgda-3.1.5/providers/msql/gda-msql.h	2012-01-03 11:15:11.347499020 +0100
+@@ -22,10 +22,10 @@
+ #ifndef __gda_msql_h__
+ #define __gda_msql_h__
+ 
+-#include <glib/gmacros.h>
++#include <glib.h>
+ #include <libgda/gda-connection.h>
+ #include <libgda/gda-server-provider.h>
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ #include "gda-msql-provider.h"
+ #include <msql.h>
+ 
+--- libgda-3.1.5/providers/mysql/gda-mysql.h.glib-includes	2012-01-03 11:14:11.378469281 +0100
++++ libgda-3.1.5/providers/mysql/gda-mysql.h	2012-01-03 11:15:11.239498967 +0100
+@@ -25,10 +25,10 @@
+ #ifndef __GDA_MYSQL_H__
+ #define __GDA_MYSQL_H__
+ 
+-#include <glib/gmacros.h>
++#include <glib.h>
+ #include <libgda/gda-connection.h>
+ #include <libgda/gda-server-provider.h>
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-value.h>
+ #include "gda-mysql-provider.h"
+ 
+--- libgda-3.1.5/providers/odbc/gda-odbc.h.glib-includes	2012-01-03 11:14:11.699469439 +0100
++++ libgda-3.1.5/providers/odbc/gda-odbc.h	2012-01-03 11:15:11.684499187 +0100
+@@ -25,9 +25,9 @@
+ #if !defined(__gda_odbc_h__)
+ #  define __gda_odbc_h__
+ 
+-#include <glib/gmacros.h>
+-#include <glib-object.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib-object.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-server-provider.h>
+ #if defined(__CYGWIN__)
+ #  define WIN32_LEAN_AND_MEAN
+--- libgda-3.1.5/providers/oracle/gda-oracle.h.glib-includes	2012-01-03 11:14:11.522469352 +0100
++++ libgda-3.1.5/providers/oracle/gda-oracle.h	2012-01-03 11:15:11.451499072 +0100
+@@ -31,10 +31,10 @@
+ #if defined(HAVE_CONFIG_H)
+ #endif
+ 
+-#include <glib/gmacros.h>
++#include <glib.h>
+ #include <libgda/gda-connection.h>
+ #include <libgda/gda-server-provider.h>
+-#include <glib/gi18n-lib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-value.h>
+ #include "gda-oracle-provider.h"
+ #include "gda-oracle-recordset.h"
+--- libgda-3.1.5/providers/postgres/gda-postgres.h.glib-includes	2012-01-03 11:14:11.632469406 +0100
++++ libgda-3.1.5/providers/postgres/gda-postgres.h	2012-01-03 11:15:11.541499117 +0100
+@@ -24,8 +24,8 @@
+ #ifndef __GDA_POSTGRES_H__
+ #define __GDA_POSTGRES_H__
+ 
+-#include <glib/gmacros.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-server-provider.h>
+ #include "gda-postgres-provider.h"
+ #include "gda-postgres-recordset.h"
+--- libgda-3.1.5/providers/sybase/gda-sybase.h.glib-includes	2012-01-03 11:14:11.879469528 +0100
++++ libgda-3.1.5/providers/sybase/gda-sybase.h	2012-01-03 11:15:11.867499279 +0100
+@@ -32,8 +32,8 @@
+ #  include <config.h>
+ #endif
+ 
+-#include <glib/gmacros.h>
+-#include <glib/gi18n-lib.h>
++#include <glib.h>
++#include <glib/gi18n-lib.h>
+ #include <libgda/gda-server-provider.h>
+ #include <ctpublic.h>
+ #include <cspublic.h>
+--- libgda-3.1.5/tools/gda-sql.c.glib-includes	2012-01-03 11:14:11.949469562 +0100
++++ libgda-3.1.5/tools/gda-sql.c	2012-01-03 11:15:12.243499466 +0100
+@@ -21,13 +21,13 @@
+ 
+ #include <libgda/libgda.h>
+ #include <virtual/libgda-virtual.h>
+-#include <glib/gi18n-lib.h>
+-#include <glib/gprintf.h>
++#include <glib/gi18n-lib.h>
++#include <glib.h>
+ #include <string.h>
+ #include <errno.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+-#include <glib/gstdio.h>
++#include <glib/gstdio.h>
+ #include "tools-input.h"
+ #include "command-exec.h"
+ #include <unistd.h>

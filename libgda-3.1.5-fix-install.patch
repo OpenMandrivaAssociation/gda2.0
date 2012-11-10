@@ -1,0 +1,10 @@
+--- providers/sqlite/Makefile.am~	2008-07-20 11:51:16.000000000 +0200
++++ providers/sqlite/Makefile.am	2009-10-05 06:54:06.000000000 +0200
+@@ -22,7 +22,6 @@
+ xmldir   = $(datadir)/libgda-3.0
+ xml_in_files = sqlite_specs_create_db.xml.in \
+ 	sqlite_specs_dsn.xml.in \
+-	sqlite_specs_create_db.xml.in \
+ 	sqlite_specs_drop_db.xml.in \
+ 	sqlite_specs_create_table.xml.in \
+ 	sqlite_specs_drop_table.xml.in \

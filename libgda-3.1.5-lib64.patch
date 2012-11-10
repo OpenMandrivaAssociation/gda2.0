@@ -1,0 +1,106 @@
+--- configure.in.lib64	2011-04-11 08:57:43.000000000 +0200
++++ configure.in	2011-04-11 09:02:31.000000000 +0200
+@@ -263,7 +263,7 @@
+ 		else
+ 			AC_DEFINE(HAVE_BDB, 1, [Have Berkeley DB])
+ 			BDB_CFLAGS="-I${bdbdir}/include"
+-			BDB_LIBS="-L${bdbdir}/lib ${bdblib}"
++			BDB_LIBS="-L${bdbdir}/$lib ${bdblib}"
+ 		fi
+ 	fi
+ fi
+@@ -324,7 +324,7 @@
+ 	else
+ 		AC_DEFINE(HAVE_ODBC, 1, [Have ODBC])
+ 		ODBC_CFLAGS="-I${odbcdir}/include"
+-		ODBC_LIBS="-L${odbcdir}/lib ${odbclib}"
++		ODBC_LIBS="-L${odbcdir}/$lib ${odbclib}"
+ 	fi
+ fi
+ 
+@@ -505,7 +505,7 @@
+ 			AC_MSG_WARN(Postgres include files not found, backend not used)
+ 			postgresdir=""
+ 		fi
+-		POSTGRES_LIBS="-L${postgresdir}/lib -lpq"
++		POSTGRES_LIBS="-L${postgresdir}/$lib -lpq"
+ 		AC_DEFINE(HAVE_POSTGRES, 1, [Have PostgreSQL])
+ 	fi
+ fi
+@@ -563,7 +563,7 @@
+ 		else
+ 			AC_MSG_RESULT($freetdsvercheck)
+ 			FREETDS_CFLAGS="-I${freetds_incdir}"
+-			FREETDS_LIBS="-L${freetdsdir}/lib -ltds"
++			FREETDS_LIBS="-L${freetdsdir}/$lib -ltds"
+ 			AC_DEFINE(HAVE_FREETDS, 1, [Have freetds])
+ 
+ 			freetds_version_major="`echo $freetdsvercheck|sed 's:^\([[^.]]*\).*:\1:'`"
+@@ -699,8 +699,8 @@
+ 		AC_MSG_CHECKING(for Sybase host system type)
+ 		AC_MSG_RESULT($host)
+ 		case "$host" in
+-		*linux*) sybase_ctlibs="-L${sybasedir}/lib -lct -lcs -lsybtcl -lcomn -lintl"
+-			sybase_blklibs="-L${sybasedir}/lib -lblk ${sybase_ctlibs}"
++		*linux*) sybase_ctlibs="-L${sybasedir}/$lib -lct -lcs -lsybtcl -lcomn -lintl"
++			sybase_blklibs="-L${sybasedir}/$lib -lblk ${sybase_ctlibs}"
+ 			SYBASE_LIBS="${SYBASE_LIBS} ${sybase_blklibs}"
+ 			AC_CHECK_LIB(ct,tdsdump_on,[
+ 			AC_MSG_WARN(linking against freetds libct)
+@@ -785,7 +785,7 @@
+ 	else
+ 		AC_DEFINE(HAVE_ORACLE, 1, [Have ORACLE])
+ 		ORACLE_CFLAGS=" -I$oracledir/include/oracle/client -I$oracledir/rdbms/demo -I${ORACLE_HOME}/rdbms/public -I${ORACLE_HOME}/plsql/public -I$oracledir/network/public"
+-		ORACLE_LIBS="-L$oracledir/lib -lm -ldl -lclntsh"
++		ORACLE_LIBS="-L$oracledir/$lib -lm -ldl -lclntsh"
+ 	fi
+ fi
+ 
+@@ -823,15 +823,15 @@
+ 	else
+ 		AC_DEFINE(HAVE_FIREBIRD, 1, [Have FireBird])
+ 		FIREBIRD_CFLAGS="-I${firebirddir}/include"
+-		if test -f $firebirddir/lib/libfbembed.so
++		if test -f $firebirddir/$lib/libfbembed.so
+ 		then
+-			FIREBIRD_LIBS="-L${firebirddir}/lib -lfbembed"
++			FIREBIRD_LIBS="-L${firebirddir}/$lib -lfbembed"
+ 		else
+-			if test -f $firebirddir/lib/libfbclient.so
++			if test -f $firebirddir/$lib/libfbclient.so
+ 			then
+-				FIREBIRD_LIBS="-L${firebirddir}/lib -lfbclient"
++				FIREBIRD_LIBS="-L${firebirddir}/$lib -lfbclient"
+ 			else
+-				FIREBIRD_LIBS="-L${firebirddir}/lib -lgds -ldl -lcrypt"
++				FIREBIRD_LIBS="-L${firebirddir}/$lib -lgds -ldl -lcrypt"
+ 			fi
+ 		fi
+ 	fi
+@@ -871,7 +871,7 @@
+ 		AC_MSG_WARN(Xbase backend not used)
+ 	else
+ 		XBASE_CFLAGS=-I${xbasedir}/include
+-		XBASE_LIBS="-L${xbasedir}/lib -lxbase64"
++		XBASE_LIBS="-L${xbasedir}/$lib -lxbase64"
+ 		AC_DEFINE(HAVE_XBASE, 1, [Have Xbase])
+ 	fi
+ fi
+@@ -910,7 +910,7 @@
+ 		AC_MSG_WARN(MDB backend not used)
+ 	else
+ 		MDB_CFLAGS=-I${mdbdir}/include
+-		MDB_LIBS="-L${mdbdir}/lib -lmdb"
++		MDB_LIBS="-L${mdbdir}/$lib -lmdb"
+ 		AC_DEFINE(HAVE_MDB, 1, [Have MDB])
+ 
+ 		save_CFLAGS="$CFLAGS"
+@@ -989,7 +989,7 @@
+ 		AC_MSG_WARN(LDAP backend not used)
+ 	else
+ 		LDAP_CFLAGS="-I${ldapdir}/include"
+-		LDAP_LIBS="-L${ldapdir}/lib -lldap -llber"
++		LDAP_LIBS="-L${ldapdir}/$lib -lldap -llber"
+ 		AC_DEFINE(HAVE_LDAP, 1, [Have LDAP])
+ 	fi
+ fi

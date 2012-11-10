@@ -1,0 +1,335 @@
+diff -p -up libgda-3.1.5/libgda/gda-connection.c~ libgda-3.1.5/libgda/gda-connection.c
+--- libgda-3.1.5/libgda/gda-connection.c~	2008-07-20 11:51:23.000000000 +0200
++++ libgda-3.1.5/libgda/gda-connection.c	2009-02-25 14:30:11.000000000 +0100
+@@ -541,7 +541,7 @@ gda_connection_open (GdaConnection *cnc,
+ 				if (gda_connection_event_get_event_type (event) == GDA_CONNECTION_EVENT_ERROR) {
+ 					if (error && !(*error))
+ 						g_set_error (error, GDA_CONNECTION_ERROR, GDA_CONNECTION_OPEN_ERROR,
+-							     gda_connection_event_get_description (event));
++							     "%s", gda_connection_event_get_description (event));
+ 					gda_client_notify_error_event (cnc->priv->client, cnc, 
+ 								       GDA_CONNECTION_EVENT (l->data));
+ 				}
+@@ -1201,7 +1201,7 @@ gda_connection_execute_command (GdaConne
+ 		if (gda_connection_event_get_event_type (GDA_CONNECTION_EVENT (events->data)) == 
+ 		    GDA_CONNECTION_EVENT_ERROR) {
+ 			g_set_error (error, GDA_CONNECTION_ERROR, GDA_CONNECTION_EXECUTE_COMMAND_ERROR,
+-				     gda_connection_event_get_description (GDA_CONNECTION_EVENT (events->data)));
++				     "%s", gda_connection_event_get_description (GDA_CONNECTION_EVENT (events->data)));
+ 			has_error = TRUE;
+ 		}
+ 		events = g_list_next (events);
+diff -p -up libgda-3.1.5/libgda/gda-data-model-bdb.c~ libgda-3.1.5/libgda/gda-data-model-bdb.c
+--- libgda-3.1.5/libgda/gda-data-model-bdb.c~	2008-07-20 11:51:23.000000000 +0200
++++ libgda-3.1.5/libgda/gda-data-model-bdb.c	2009-02-25 14:30:50.000000000 +0100
+@@ -216,7 +216,7 @@ add_error (GdaDataModelBdb *model, const
+ {
+ 	GError *error = NULL;
+ 
+-        g_set_error (&error, 0, 0, err);
++        g_set_error (&error, 0, 0, "%s", err);
+ 	g_print ("ADD_ERROR (%s)\n", err);
+         model->priv->errors = g_slist_append (model->priv->errors, error);
+ }
+diff -p -up libgda-3.1.5/libgda/gda-data-model-dir.c~ libgda-3.1.5/libgda/gda-data-model-dir.c
+--- libgda-3.1.5/libgda/gda-data-model-dir.c~	2008-07-20 11:51:23.000000000 +0200
++++ libgda-3.1.5/libgda/gda-data-model-dir.c	2009-02-25 14:34:08.000000000 +0100
+@@ -250,7 +250,7 @@ add_error (GdaDataModelDir *model, const
+ {
+ 	GError *error = NULL;
+ 
+-        g_set_error (&error, 0, 0, err);
++        g_set_error (&error, 0, 0, "%s", err);
+ 	g_print ("ADD_ERROR (%s)\n", err);
+         model->priv->errors = g_slist_append (model->priv->errors, error);
+ }
+@@ -929,7 +929,7 @@ gda_data_model_dir_set_values (GdaDataMo
+                 str = g_strdup_printf (_("Row %d out of range 0 - %d"), row,
+ 				       imodel->priv->rows->len - 1);
+ 		add_error (imodel, str);
+-		g_set_error (error, 0, 0, str);
++		g_set_error (error, 0, 0, "%s", str);
+ 		g_free (str);
+                 return FALSE;
+         }
+@@ -1006,7 +1006,7 @@ gda_data_model_dir_set_values (GdaDataMo
+ 					str = g_strdup_printf (_("Could not rename file '%s' to '%s'"), 
+ 							       filename, new_filename);
+ 					add_error (imodel, str);
+-					g_set_error (error, 0, 0, str);
++					g_set_error (error, 0, 0, "%s", str);
+ 					g_free (str);
+ 					g_free (new_filename);
+ 					g_free (filename);
+@@ -1029,7 +1029,7 @@ gda_data_model_dir_set_values (GdaDataMo
+ 				gchar *str;
+ 				str = g_strdup_printf (_("Could not create directory '%s'"), new_path);
+ 				add_error (imodel, str);
+-				g_set_error (error, 0, 0, str);
++				g_set_error (error, 0, 0, "%s", str);
+ 				g_free (str);
+ 				g_free (old_path);
+ 				return FALSE;
+@@ -1049,7 +1049,7 @@ gda_data_model_dir_set_values (GdaDataMo
+ 				gchar *str;
+ 				str = g_strdup_printf (_("Could not rename file '%s' to '%s'"), filename, new_filename);
+ 				add_error (imodel, str);
+-				g_set_error (error, 0, 0, str);
++				g_set_error (error, 0, 0, "%s", str);
+ 				g_free (str);
+ 				g_free (new_filename);
+ 				g_free (filename);
+@@ -1098,7 +1098,7 @@ gda_data_model_dir_set_values (GdaDataMo
+ 					gchar *str;
+ 					str = g_strdup_printf (_("Could not overwrite contents of file '%s'"), filename);
+ 					add_error (imodel, str);
+-					g_set_error (error, 0, 0, str);
++					g_set_error (error, 0, 0, "%s", str);
+ 					g_free (str);
+ 					g_object_unref (op);
+ 					g_free (filename);
+@@ -1230,7 +1230,7 @@ gda_data_model_dir_append_values (GdaDat
+ 				gchar *str;
+ 				str = g_strdup_printf (_("Cannot set contents of filename '%s'"), complete_filename);
+ 				add_error (imodel, str);
+-				g_set_error (error, 0, 0, str);
++				g_set_error (error, 0, 0, "%s", str);
+ 				g_free (str);
+ 				if (bin_to_free)
+ 					g_free (bin_data);
+@@ -1241,7 +1241,7 @@ gda_data_model_dir_append_values (GdaDat
+ 			gchar *str;
+ 			str = g_strdup_printf (_("Cannot create directory '%s'"), dirname);
+ 			add_error (imodel, str);
+-			g_set_error (error, 0, 0, str);
++			g_set_error (error, 0, 0, "%s", str);
+ 			g_free (str);
+ 			return -1;
+ 		}
+@@ -1272,7 +1272,7 @@ gda_data_model_dir_remove_row (GdaDataMo
+                 str = g_strdup_printf (_("Row %d out of range 0 - %d"), row,
+ 				       imodel->priv->rows->len - 1);
+ 		add_error (imodel, str);
+-		g_set_error (error, 0, 0, str);
++		g_set_error (error, 0, 0, "%s", str);
+ 		g_free (str);
+                 return FALSE;
+         }
+@@ -1288,7 +1288,7 @@ gda_data_model_dir_remove_row (GdaDataMo
+ 		gchar *str;
+ 		str = g_strdup_printf (_("Cannot remove file '%s'"), filename);
+ 		add_error (imodel, str);
+-		g_set_error (error, 0, 0, str);
++		g_set_error (error, 0, 0, "%s", str);
+ 		g_free (str);
+ 		g_free (filename);
+ 		return FALSE;
+diff -p -up libgda-3.1.5/libgda/gda-data-model-import.c~ libgda-3.1.5/libgda/gda-data-model-import.c
+--- libgda-3.1.5/libgda/gda-data-model-import.c~	2008-07-20 11:51:23.000000000 +0200
++++ libgda-3.1.5/libgda/gda-data-model-import.c	2009-02-25 14:34:33.000000000 +0100
+@@ -1734,7 +1734,7 @@ add_error (GdaDataModelImport *model, co
+ {
+ 	GError *error = NULL;
+ 
+-	g_set_error (&error, 0, 0, err);
++	g_set_error (&error, 0, 0, "%s", err);
+ 	model->priv->errors = g_slist_append (model->priv->errors, error);
+ }
+ 
+diff -p -up libgda-3.1.5/libgda/gda-parameter-list.c~ libgda-3.1.5/libgda/gda-parameter-list.c
+--- libgda-3.1.5/libgda/gda-parameter-list.c~	2008-07-20 11:51:23.000000000 +0200
++++ libgda-3.1.5/libgda/gda-parameter-list.c	2009-02-25 14:35:48.000000000 +0100
+@@ -579,7 +579,7 @@ gda_parameter_list_new_from_spec_node (G
+ 				errors = gda_data_model_import_get_errors (GDA_DATA_MODEL_IMPORT (model));
+ 				if (errors) {
+ 					GError *err = (GError *) errors->data;
+-					g_set_error (error, 0, 0, err->message);
++					g_set_error (error, 0, 0, "%s", err->message);
+ 					g_object_unref (model);
+ 					model = NULL;
+ 					allok = FALSE;
+@@ -803,7 +803,7 @@ gda_parameter_list_get_spec (GdaParamete
+ 	/* parameters' values, sources, constraints: TODO */
+ 
+ 	xmlDocDumpFormatMemory(doc, &xmlbuff, &buffersize, 1);
+-	g_print ((gchar *) xmlbuff);
++	g_print ("%s", (gchar *) xmlbuff);
+ 	
+ 	xmlFreeDoc(doc);
+ 	return (gchar *) xmlbuff;
+diff -p -up libgda-3.1.5/libgda/gda-query.c~ libgda-3.1.5/libgda/gda-query.c
+--- libgda-3.1.5/libgda/gda-query.c~	2008-07-20 11:51:23.000000000 +0200
++++ libgda-3.1.5/libgda/gda-query.c	2009-02-25 14:36:25.000000000 +0100
+@@ -2827,7 +2827,7 @@ gda_query_execute (GdaQuery *query, GdaP
+ 				     GDA_CONNECTION_EVENT_ERROR) &&
+ 				    !g_list_find (errors_before, list->data)) 
+ 					g_set_error (error, GDA_QUERY_ERROR, GDA_QUERY_EXEC_ERROR,
+-						     gda_connection_event_get_description (GDA_CONNECTION_EVENT (list->data)));
++						     "%s", gda_connection_event_get_description (GDA_CONNECTION_EVENT (list->data)));
+ 			}
+ 			if (errors_before)
+ 				gda_connection_event_list_free (errors_before);
+@@ -4359,7 +4359,7 @@ gda_query_load_from_xml (GdaXmlStorage *
+ 						errors = gda_data_model_import_get_errors (GDA_DATA_MODEL_IMPORT (model));
+ 						if (errors) {
+ 							GError *err = (GError *) errors->data;
+-							g_set_error (error, 0, 0, err->message);
++							g_set_error (error, 0, 0, "%s", err->message);
+ 							g_object_unref (model);
+ 							model = NULL;
+ 							return FALSE;
+diff -p -up libgda-3.1.5/libgda/gda-query-field-value.c~ libgda-3.1.5/libgda/gda-query-field-value.c
+--- libgda-3.1.5/libgda/gda-query-field-value.c~	2008-07-20 11:51:23.000000000 +0200
++++ libgda-3.1.5/libgda/gda-query-field-value.c	2009-02-25 14:39:01.000000000 +0100
+@@ -1474,7 +1474,7 @@ gda_query_field_value_render_as_sql (Gda
+ 				g_set_error (error,
+ 					     GDA_QUERY_FIELD_VALUE_ERROR,
+ 					     GDA_QUERY_FIELD_VALUE_RENDER_ERROR,
+-					     str);
++					     "%s", str);
+ 				g_free (str);
+ 				
+ 				/*g_print ("Param %p (%s) is invalid!\n", param_source, 
+diff -p -up libgda-3.1.5/libgda/sql-delimiter/gda-sql-delimiter.c~ libgda-3.1.5/libgda/sql-delimiter/gda-sql-delimiter.c
+--- libgda-3.1.5/libgda/sql-delimiter/gda-sql-delimiter.c~	2008-07-20 11:51:22.000000000 +0200
++++ libgda-3.1.5/libgda/sql-delimiter/gda-sql-delimiter.c	2009-02-25 14:27:37.000000000 +0100
+@@ -60,7 +60,7 @@ gda_delimitererror (char *string)
+ 				g_set_error (gda_sql_error, 0, 0, _("Parse error near `%s'"), gda_delimitertext);
+ 			else if (!strcmp (string, "syntax error"))
+ 				g_set_error (gda_sql_error, 0, 0, _("Syntax error near `%s'"), gda_delimitertext);
+-			else g_set_error (gda_sql_error, 0, 0, string);
++			else g_set_error (gda_sql_error, 0, 0, "%s", string);
+ 		}
+ 	}
+ 	else
+diff -p -up libgda-3.1.5/libgda/sqlite/gda-sqlite-provider.c~ libgda-3.1.5/libgda/sqlite/gda-sqlite-provider.c
+--- libgda-3.1.5/libgda/sqlite/gda-sqlite-provider.c~	2008-07-20 11:51:22.000000000 +0200
++++ libgda-3.1.5/libgda/sqlite/gda-sqlite-provider.c	2009-02-25 14:26:32.000000000 +0100
+@@ -1032,7 +1032,7 @@ gda_sqlite_provider_perform_operation (G
+ 		g_free (filename);
+ 
+ 		if (errmsg != SQLITE_OK) {
+-			g_set_error (error, 0, 0, sqlite3_errmsg (scnc->connection)); 
++		  g_set_error (error, 0, 0, "%s", sqlite3_errmsg (scnc->connection)); 
+ 			retval = FALSE;
+ 		}
+ 		gda_sqlite_free_cnc (scnc);
+@@ -1059,7 +1059,7 @@ gda_sqlite_provider_perform_operation (G
+ 
+ 		if (g_unlink (filename)) {
+ 			g_set_error (error, 0, 0,
+-				     sys_errlist [errno]);
++				     "%s", sys_errlist [errno]);
+ 			retval = FALSE;
+ 		}
+ 		g_free (filename);
+diff -p -up libgda-3.1.5/libgda/sqlite/virtual/gda-vconnection-data-model.c~ libgda-3.1.5/libgda/sqlite/virtual/gda-vconnection-data-model.c
+--- libgda-3.1.5/libgda/sqlite/virtual/gda-vconnection-data-model.c~	2008-07-20 11:51:22.000000000 +0200
++++ libgda-3.1.5/libgda/sqlite/virtual/gda-vconnection-data-model.c	2009-02-25 14:25:41.000000000 +0100
+@@ -242,7 +242,7 @@ gda_vconnection_data_model_add (GdaVconn
+ 	rc = sqlite3_exec (scnc->connection, str, NULL, 0, &zErrMsg);
+ 	g_free (str);
+ 	if (rc != SQLITE_OK) {
+-		g_set_error (error, 0, 0, g_strdup (zErrMsg));
++	  g_set_error (error, 0, 0, "%s", g_strdup (zErrMsg));
+ 		sqlite3_free (zErrMsg);
+ 		gda_vconnection_data_model_table_data_free (td);
+ 		cnc->priv->table_data_list = g_slist_remove (cnc->priv->table_data_list, td);
+@@ -303,7 +303,7 @@ gda_vconnection_data_model_remove (GdaVc
+ 	g_free (str);
+ 
+ 	if (rc != SQLITE_OK) {
+-		g_set_error (error, 0, 0, g_strdup (zErrMsg));
++	  g_set_error (error, 0, 0, "%s", g_strdup (zErrMsg));
+ 		sqlite3_free (zErrMsg);
+ 		return FALSE;
+ 	}
+diff -p -up libgda-3.1.5/providers/mysql/gda-mysql-provider.c~ libgda-3.1.5/providers/mysql/gda-mysql-provider.c
+--- libgda-3.1.5/providers/mysql/gda-mysql-provider.c~	2008-07-20 11:51:16.000000000 +0200
++++ libgda-3.1.5/providers/mysql/gda-mysql-provider.c	2009-02-25 14:40:29.000000000 +0100
+@@ -282,7 +282,7 @@ real_open_connection (const gchar *host,
+ 	
+ 	
+ 	if (!mysql_ret) {
+-		g_set_error (error, 0, 0, mysql_error (mysql));
++		g_set_error (error, 0, 0, "%s", mysql_error (mysql));
+ 		g_free (mysql);
+ 		return NULL;
+ 	}
+@@ -767,7 +767,7 @@ gda_mysql_provider_perform_operation (Gd
+ 			g_free (sql);
+ 			
+ 			if (res) {
+-				g_set_error (error, 0, 0, mysql_error (mysql));
++				g_set_error (error, 0, 0, "%s", mysql_error (mysql));
+ 				mysql_close (mysql);
+ 				return FALSE;
+ 			}
+diff -p -up libgda-3.1.5/providers/mysql/gda-mysql-recordset.c~ libgda-3.1.5/providers/mysql/gda-mysql-recordset.c
+--- libgda-3.1.5/providers/mysql/gda-mysql-recordset.c~	2008-07-20 11:51:16.000000000 +0200
++++ libgda-3.1.5/providers/mysql/gda-mysql-recordset.c	2009-02-25 14:41:49.000000000 +0100
+@@ -314,7 +314,7 @@ gda_mysql_recordset_get_row (GdaDataMode
+ 		str = g_strdup_printf (_("Row number out of range 0 - %d"),
+ 				       priv_data->mysql_res_rows - 1);
+ 		gda_connection_add_event_string (priv_data->cnc, str);
+-		g_set_error (error, 0, 0, str);
++		g_set_error (error, 0, 0, "%s", str);
+ 		g_free (str);
+ 						 
+ 		return NULL;
+@@ -830,7 +830,7 @@ gda_mysql_recordset_update_row (GdaDataM
+ 		GdaConnectionEvent *event = gda_mysql_make_error (mysql);
+ 		gda_connection_add_event (priv_data->cnc, event);
+ 		g_set_error (error, 0, 0,
+-			     gda_connection_event_get_description (event));
++			     "%s", gda_connection_event_get_description (event));
+ 		return FALSE;
+ 	}
+ 	
+diff -p -up libgda-3.1.5/providers/postgres/gda-postgres-provider.c~ libgda-3.1.5/providers/postgres/gda-postgres-provider.c
+--- libgda-3.1.5/providers/postgres/gda-postgres-provider.c~	2008-07-20 11:51:16.000000000 +0200
++++ libgda-3.1.5/providers/postgres/gda-postgres-provider.c	2009-02-25 14:44:00.000000000 +0100
+@@ -1063,7 +1063,7 @@ gda_postgres_provider_perform_operation 
+                 g_string_free (string, TRUE);
+ 
+ 		if (PQstatus (pconn) != CONNECTION_OK) {
+-                        g_set_error (error, 0, 0, PQerrorMessage (pconn));
++                        g_set_error (error, 0, 0, "%s", PQerrorMessage (pconn));
+                         PQfinish(pconn);
+ 
+                         return FALSE;
+@@ -1077,7 +1077,7 @@ gda_postgres_provider_perform_operation 
+ 			pg_res = gda_postgres_PQexec_wrap (cnc, pconn, sql);
+ 			g_free (sql);
+ 			if (!pg_res || PQresultStatus (pg_res) != PGRES_COMMAND_OK) {
+-				g_set_error (error, 0, 0, PQresultErrorMessage (pg_res));
++				g_set_error (error, 0, 0, "%s", PQresultErrorMessage (pg_res));
+ 				PQfinish (pconn);
+ 				return FALSE;
+ 			}
+diff -p -up libgda-3.1.5/tools/gda-config-tool.c~ libgda-3.1.5/tools/gda-config-tool.c
+--- libgda-3.1.5/tools/gda-config-tool.c~	2008-07-20 11:51:14.000000000 +0200
++++ libgda-3.1.5/tools/gda-config-tool.c	2009-02-25 14:47:08.000000000 +0100
+@@ -1402,9 +1402,9 @@ display_provider (gpointer data, gpointe
+ 	const char *paramInDsn = "DSN parameters:";
+ 
+ 	g_print ("Provider name: %s\n", info->id);
+-	g_print (desc);
++	g_print ("%s", desc);
+ 	pretty_print (info->description, strlen (desc));
+-	g_print (paramInDsn);
++	g_print ("%s", paramInDsn);
+ 	str = g_string_new (NULL);
+ 	if (info->gda_params) 
+ 		g_slist_foreach (info->gda_params->parameters, add_param_name_to_string, str);
+--- libgda-3.1.5/libsql/sql_parser.c.format-strings	2012-01-03 11:20:49.789670621 +0100
++++ libgda-3.1.5/libsql/sql_parser.c	2012-01-03 11:21:22.619687595 +0100
+@@ -387,7 +387,7 @@ sql_parse_with_error(const char *sqlquer
+ 	if (sqlquery == NULL)
+ 		{
+ 			if (error)
+-				g_set_error(error, 0, 0, _("Empty query to parse"));
++			  g_set_error(error, 0, 0, "%s", _("Empty query to parse"));
+ 			else
+ 				g_fprintf (stderr, "SQL parse error, you can not specify NULL");
+ 			return NULL;
