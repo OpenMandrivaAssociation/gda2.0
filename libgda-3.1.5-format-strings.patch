@@ -322,14 +322,3 @@ diff -p -up libgda-3.1.5/tools/gda-config-tool.c~ libgda-3.1.5/tools/gda-config-
  	str = g_string_new (NULL);
  	if (info->gda_params) 
  		g_slist_foreach (info->gda_params->parameters, add_param_name_to_string, str);
---- libgda-3.1.5/libsql/sql_parser.c.format-strings	2012-01-03 11:20:49.789670621 +0100
-+++ libgda-3.1.5/libsql/sql_parser.c	2012-01-03 11:21:22.619687595 +0100
-@@ -387,7 +387,7 @@ sql_parse_with_error(const char *sqlquer
- 	if (sqlquery == NULL)
- 		{
- 			if (error)
--				g_set_error(error, 0, 0, _("Empty query to parse"));
-+			  g_set_error(error, 0, 0, "%s", _("Empty query to parse"));
- 			else
- 				g_fprintf (stderr, "SQL parse error, you can not specify NULL");
- 			return NULL;
