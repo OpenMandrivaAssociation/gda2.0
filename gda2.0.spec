@@ -22,7 +22,7 @@
 Summary:	GNU Data Access
 Name: 		%{name}
 Version: 3.1.5
-Release: 14
+Release: 15
 License: 	GPLv2+ and LGPLv2+
 Group: 		Databases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.bz2
@@ -39,7 +39,7 @@ BuildRequires:	gdbm-devel
 BuildRequires:	glib2-devel
 BuildRequires:	libxslt-devel >= 1.0.9
 BuildRequires:	ncurses-devel
-BuildRequires:  openldap2-devel
+BuildRequires:  openldap-devel
 BuildRequires:	intltool
 BuildRequires:	popt-devel
 BuildRequires:	postgresql-devel
