@@ -201,8 +201,10 @@ This package includes the GDA sqlite provider
 autoreconf -fi
 
 %build
+%global optflags %{optflags} -Wno-error -Wno-return-type
+
 export LIBS=-ldl
-%configure2_5x \
+%configure \
 %if %{build_mysql}
 	--with-mysql=yes \
 %endif
