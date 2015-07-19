@@ -22,7 +22,7 @@
 Summary:	GNU Data Access
 Name:		gda2.0
 Version:	3.1.5
-Release:	23
+Release:	24
 License:	GPLv2+ and LGPLv2+
 Group:		Databases
 Url:		http://www.gnome-db.org/
