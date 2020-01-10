@@ -197,7 +197,7 @@ This package includes the GDA sqlite provider
 
 %prep
 %setup -qn %{pkgname}-%{version}
-%apply_patches
+%autopatch -p1
 autoreconf -fi
 
 %build
