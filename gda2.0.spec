@@ -25,7 +25,7 @@ Version:	3.1.5
 Release:	24
 License:	GPLv2+ and LGPLv2+
 Group:		Databases
-Url:		http://www.gnome-db.org/
+Url:		https://www.gnome-db.org/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{url_ver}/%{pkgname}-%{version}.tar.bz2
 Patch0:		libgda-3.1.5-format-strings.patch
 Patch1:		libgda-3.1.5-fix-install.patch
