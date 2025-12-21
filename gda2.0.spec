@@ -33,6 +33,11 @@ Patch2:		libgda-3.1.5-xbase64.patch
 Patch3:		libgda-3.1.5-lib64.patch
 Patch4:		libgda-3.1.5-glib-includes.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gtk-doc
